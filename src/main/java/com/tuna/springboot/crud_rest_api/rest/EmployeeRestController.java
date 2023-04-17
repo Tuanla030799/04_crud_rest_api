@@ -3,9 +3,7 @@ package com.tuna.springboot.crud_rest_api.rest;
 import com.tuna.springboot.crud_rest_api.entity.Employee;
 import com.tuna.springboot.crud_rest_api.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,46 @@ public class EmployeeRestController {
 	@GetMapping("/employees")
 	public List<Employee> findAll() {
 		return employeeService.findAll();
+	}
+	
+	// add mapping for GET /employees/{employeeId}
+	@GetMapping("employees/{employeeId}")
+	public Employee getEmployeeById(@PathVariable int employeeId) {
+		Employee theEmployee = employeeService.findById(employeeId);
+		
+		if (theEmployee == null) {
+			throw new RuntimeException("Employee id not found -" + employeeId);
+		}
+		
+		return theEmployee;
+	}
+	
+	// add mapping for POST /employees - add new employee
+	@PostMapping("/employees")
+	public Employee addEmployee(@RequestBody Employee theEmployee) {
+		theEmployee.setId(0);
+		
+		return this.employeeService.save(theEmployee);
+	}
+	
+	// add mapping for PUT /employees - update existing employee
+	@PutMapping("/employees")
+	public Employee updateEmployee(@RequestBody Employee theEmployee) {
+		return this.employeeService.save(theEmployee);
+	}
+	
+	// delete mapping for DELETE /employees/{employeeId} - delete employee
+	
+	@DeleteMapping("/employees/{employeeId}")
+	public String deleteEmployee(@PathVariable int employeeId) {
+		Employee tempEmployee = this.employeeService.findById(employeeId);
+		
+		if (tempEmployee == null) {
+			throw new RuntimeException("Employee id not found" + employeeId);
+		}
+		
+		this.employeeService.deleteById(employeeId);
+		
+		return "Delete employee id -" + employeeId;
 	}
 }
