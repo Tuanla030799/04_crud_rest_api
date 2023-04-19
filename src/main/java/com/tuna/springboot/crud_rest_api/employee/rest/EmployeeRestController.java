@@ -1,7 +1,7 @@
-package com.tuna.springboot.crud_rest_api.rest;
+package com.tuna.springboot.crud_rest_api.employee.rest;
 
-import com.tuna.springboot.crud_rest_api.entity.Employee;
-import com.tuna.springboot.crud_rest_api.service.EmployeeService;
+import com.tuna.springboot.crud_rest_api.employee.entity.Employee;
+import com.tuna.springboot.crud_rest_api.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

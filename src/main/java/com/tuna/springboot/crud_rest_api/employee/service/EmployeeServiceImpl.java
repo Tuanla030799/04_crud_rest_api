@@ -1,7 +1,7 @@
-package com.tuna.springboot.crud_rest_api.service;
+package com.tuna.springboot.crud_rest_api.employee.service;
 
-import com.tuna.springboot.crud_rest_api.dao.EmployeeRepository;
-import com.tuna.springboot.crud_rest_api.entity.Employee;
+import com.tuna.springboot.crud_rest_api.employee.repository.EmployeeRepository;
+import com.tuna.springboot.crud_rest_api.employee.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

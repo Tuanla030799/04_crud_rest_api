@@ -1,6 +1,6 @@
-package com.tuna.springboot.crud_rest_api.service;
+package com.tuna.springboot.crud_rest_api.employee.service;
 
-import com.tuna.springboot.crud_rest_api.entity.Employee;
+import com.tuna.springboot.crud_rest_api.employee.entity.Employee;
 
 import java.util.List;
 

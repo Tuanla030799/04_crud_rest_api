@@ -1,4 +1,4 @@
-package com.tuna.springboot.crud_rest_api.entity;
+package com.tuna.springboot.crud_rest_api.employee.entity;
 
 import jakarta.persistence.*;
 
