@@ -1,5 +1,6 @@
 package com.tuna.springboot.crud_rest_api.book.entity;
 
+import com.tuna.springboot.crud_rest_api.employee.entity.Employee;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,8 +11,8 @@ public class Book {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "employee_id")
-	private int employeeId;
+//	@Column(name = "employee_id")
+//	private int employeeId;
 	
 	@Column(name = "name")
 	private String name;
@@ -22,14 +23,18 @@ public class Book {
 	@Column(name = "price")
 	private float price;
 	
+//	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//	@JoinColumn(name = "employee_id")
+//	private Employee employee;
+	
 	public Book() {
 	}
 	
-	public Book(int employeeId, String name, String author, float price) {
-		this.employeeId = employeeId;
+	public Book(String name, String author, float price, Employee employee) {
 		this.name = name;
 		this.author = author;
 		this.price = price;
+//		this.employee = employee;
 	}
 	
 	public int getId() {
@@ -38,14 +43,6 @@ public class Book {
 	
 	public void setId(int id) {
 		this.id = id;
-	}
-	
-	public int getEmployeeId() {
-		return employeeId;
-	}
-	
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
 	}
 	
 	public String getName() {
@@ -72,11 +69,18 @@ public class Book {
 		this.price = price;
 	}
 	
+//	public Employee getEmployee() {
+//		return employee;
+//	}
+//
+//	public void setEmployee(Employee employee) {
+//		this.employee = employee;
+//	}
+	
 	@Override
 	public String toString() {
 		return "Book{" +
 			"id=" + id +
-			", employeeId=" + employeeId +
 			", name='" + name + '\'' +
 			", author='" + author + '\'' +
 			", price=" + price +
