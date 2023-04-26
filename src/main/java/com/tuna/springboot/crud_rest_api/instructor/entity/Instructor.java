@@ -1,6 +1,9 @@
 package com.tuna.springboot.crud_rest_api.instructor.entity;
 
+import com.tuna.springboot.crud_rest_api.course.entity.Course;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "instructor")
@@ -19,17 +22,17 @@ public class Instructor {
 	@Column(name = "email")
 	private String email;
 
-//	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-//	@JoinColumn(name = "employee_id")
-//	private List<Book> books;
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name = "instructor_id")
+	private List<Course> courses;
 
-//	public List<Book> getBooks() {
-//		return books;
-//	}
-//
-//	public void setBooks(List<Book> books) {
-//		this.books = books;
-//	}
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
 
 	public Instructor() {
 	}

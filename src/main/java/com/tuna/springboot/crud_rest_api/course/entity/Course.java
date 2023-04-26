@@ -1,6 +1,11 @@
 package com.tuna.springboot.crud_rest_api.course.entity;
 
+import com.tuna.springboot.crud_rest_api.review.entity.Review;
+import com.tuna.springboot.crud_rest_api.student.entity.Student;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "course")
@@ -12,9 +17,43 @@ public class Course {
 
 	@Column(name = "title")
 	private String title;
-
-//	@Column(name = "employee_id")
-//	private int employeeId;
+	
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name = "course_id")
+	private List<Review> reviews;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(
+		name = "course_student",
+		joinColumns = @JoinColumn(name = "course_id"),
+		inverseJoinColumns = @JoinColumn(name = "student_id")
+	)
+	private List<Student> students;
+	
+	public List<Student> getStudents() {
+		return students;
+	}
+	
+	public void setStudents(List<Student> students) {
+		this.students = students;
+	}
+	
+	// add a convenience method
+	public void addStudent(Student theStudent) {
+		if (this.students == null) {
+			this.students = new ArrayList<>();
+		}
+		
+		students.add(theStudent);
+	}
+	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 
 	public Course() {};
 

@@ -1,6 +1,10 @@
 package com.tuna.springboot.crud_rest_api.student.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tuna.springboot.crud_rest_api.course.entity.Course;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "student")
@@ -19,17 +23,24 @@ public class Student {
 	@Column(name = "email")
 	private String email;
 
-//	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-//	@JoinColumn(name = "employee_id")
-//	private List<Book> books;
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name = "employee_id")
+	private List<Course> courses;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(
+		name = "course_student",
+		joinColumns = @JoinColumn(name = "student_id"),
+		inverseJoinColumns = @JoinColumn(name = "course_id")
+	)
+	@JsonIgnore
+	public List<Course> getCourses() {
+		return courses;
+	}
 
-//	public List<Book> getBooks() {
-//		return books;
-//	}
-//
-//	public void setBooks(List<Book> books) {
-//		this.books = books;
-//	}
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
 
 	public Student() {
 	}
